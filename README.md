@@ -30,5 +30,5 @@ python calculate.py
 ## Output
 
 
-Generated Expression: (1 _ ((5 \*\* 2) _ (3 \*\* 4))) = 2025.0
+Generated Expression: (1 \* ((5 \*\* 2) \*(3 \*\* 4))) = 2025.0
 
