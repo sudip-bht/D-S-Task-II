@@ -41,29 +41,34 @@ def generate_expressions(numbers):
     Arguments:
     numbers -- A list of tuples where each tuple contains a numeric value and its string representation.
 
-    Yields:
-    A tuple containing the result of an operation and its corresponding string representation.
+    Returns:
+    A list of tuples containing the result of an operation and its corresponding string representation.
     """
+    expressions = []
     if len(numbers) == 1:
-        yield numbers[0]
+        return [(numbers[0][0], numbers[0][1])]
     else:
         for i in range(1, len(numbers)):
             left_part = numbers[:i]
             right_part = numbers[i:]
 
             # Generate expressions for left and right parts recursively
-            for valL, exprL in generate_expressions(left_part):
-                for valR, exprR in generate_expressions(right_part):
+            left_expressions = generate_expressions(left_part)
+            right_expressions = generate_expressions(right_part)
+            
+            for valL, exprL in left_expressions:
+                for valR, exprR in right_expressions:
                     for operator in OPERATORS:
                         result = apply_operation(valL, valR, operator)
                         if result is not None:
-                            yield result, f"({exprL} {operator} {exprR})"
+                            expressions.append((result, f"({exprL} {operator} {exprR})"))
 
                         # Consider reversed operations for non-commutative operators like '-', '/', '**'
                         if operator in ['-', '/', '**']:
                             result_reversed = apply_operation(valR, valL, operator)
                             if result_reversed is not None:
-                                yield result_reversed, f"({exprR} {operator} {exprL})"
+                                expressions.append((result_reversed, f"({exprR} {operator} {exprL})"))
+    return expressions
 
 def find_solution():
     """
@@ -73,7 +78,8 @@ def find_solution():
         initial = [(float(x), str(x)) for x in perm]
 
         # Generate all possible expressions for the current permutation
-        for value, expression in generate_expressions(initial):
+        expressions = generate_expressions(initial)
+        for value, expression in expressions:
             if abs(value - TARGET_RESULT) < 1e-9:
                 return value, expression
 
