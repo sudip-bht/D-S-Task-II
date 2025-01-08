@@ -86,7 +86,7 @@ def main():
     """
     value, expression = find_solution()
     if value is not None:
-        print(f"Generated Expression: {expression} = {value}")
+        print(f"Generated Expression: {expression} = {int(value)}")
     else:
         print("No solution found.")
 
