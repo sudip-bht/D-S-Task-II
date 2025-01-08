@@ -1,4 +1,4 @@
-# Target Expression Finder
+# Expression Generator
 
 This Python program attempts to find a mathematical expression using a set of numbers and operators that evaluates to a specific target result (2025 in this case). It generates all possible expressions by permuting the numbers and applying the operators between them.
 
@@ -29,6 +29,6 @@ python calculate.py
 
 ## Output
 
-```bash
-Generated Expression: (1 _ ((5 \*\* 2) _ (3 \*\* 4))) = 2025.0
-```
+
+Generated Expression: (1 \* ((5 \*\* 2) \*(3 \*\* 4))) = 2025.0
+
