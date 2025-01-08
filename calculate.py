@@ -52,7 +52,7 @@ def generate_expressions(numbers):
             left_part = numbers[:i]
             right_part = numbers[i:]
 
-            # Generate expressions for left and right parts recursively
+            # Expressions for left and right parts recursively
             left_expressions = generate_expressions(left_part)
             right_expressions = generate_expressions(right_part)
             
@@ -63,7 +63,7 @@ def generate_expressions(numbers):
                         if result is not None:
                             expressions.append((result, f"({exprLeft} {operator} {exprRight})"))
 
-                        # Consider reversed operations for non-commutative operators like '-', '/', '**'
+                        #Reversed operations for non-commutative operators like '-', '/', '**'
                         if operator in ['-', '/', '**']:
                             result_reversed = apply_operation(valRight, valLeft, operator)
                             if result_reversed is not None:
@@ -77,7 +77,7 @@ def find_solution():
     for perm in itertools.permutations(NUMBERS):
         initial = [(float(x), str(x)) for x in perm]
 
-        # Generate all possible expressions for the current permutation
+        #All possible expressions for the current permutation
         expressions = generate_expressions(initial)
         for value, expression in expressions:
             if abs(value - TARGET_RESULT) < 1e-9:
