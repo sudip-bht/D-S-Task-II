@@ -29,6 +29,6 @@ python calculate.py
 
 ## Output
 
-```bash
+
 Generated Expression: (1 _ ((5 \*\* 2) _ (3 \*\* 4))) = 2025.0
-```
+
