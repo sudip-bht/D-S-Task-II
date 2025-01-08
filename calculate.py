@@ -80,7 +80,7 @@ def find_solution():
         #All possible expressions for the current permutation
         expressions = generate_expressions(initial)
         for value, expression in expressions:
-            if abs(value - TARGET_RESULT) < 1e-9:
+            if int(value)==TARGET_RESULT:
                 return value, expression
 
     return None, None
