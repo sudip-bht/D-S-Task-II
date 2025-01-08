@@ -24,11 +24,11 @@ def apply_operation(a, b, operator):
         elif operator == '*':
             return a * b
         elif operator == '/':
-            if abs(b) < 1e-12:  # Avoid division by zero
+            if abs(b) < 1e-12:  # division by zero
                 return None
             return a / b
         elif operator == '**':
-            if a < 0 and abs(b - int(b)) > 1e-12:  # Avoid negative bases with fractional exponents
+            if a < 0 and abs(b - int(b)) > 1e-12:  # negative bases with fractional exponents
                 return None
             return a ** b
     except:
@@ -56,18 +56,18 @@ def generate_expressions(numbers):
             left_expressions = generate_expressions(left_part)
             right_expressions = generate_expressions(right_part)
             
-            for valL, exprL in left_expressions:
-                for valR, exprR in right_expressions:
+            for valLeft, exprLeft in left_expressions:
+                for valRight, exprRight in right_expressions:
                     for operator in OPERATORS:
-                        result = apply_operation(valL, valR, operator)
+                        result = apply_operation(valLeft, valRight, operator)
                         if result is not None:
-                            expressions.append((result, f"({exprL} {operator} {exprR})"))
+                            expressions.append((result, f"({exprLeft} {operator} {exprRight})"))
 
                         # Consider reversed operations for non-commutative operators like '-', '/', '**'
                         if operator in ['-', '/', '**']:
-                            result_reversed = apply_operation(valR, valL, operator)
+                            result_reversed = apply_operation(valRight, valLeft, operator)
                             if result_reversed is not None:
-                                expressions.append((result_reversed, f"({exprR} {operator} {exprL})"))
+                                expressions.append((result_reversed, f"({exprRight} {operator} {exprLeft})"))
     return expressions
 
 def find_solution():
